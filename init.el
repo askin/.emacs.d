@@ -54,6 +54,7 @@
 (require 'dash)
 
 (defun packages-install (packages)
+  "Install all given package in list PACKAGES ."
   (--each packages
     (when (not (package-installed-p it))
       (package-install it)))
@@ -115,8 +116,7 @@
 (column-number-mode t)
 
 ;; Major Mode Customization
-(setq auto-fill-mode 1)
-(setq default-major-mode 'text-mode)
+(setq-default auto-fill-function 'do-auto-fill)
 (setq initial-scratch-message nil)
 
 ;; Autosave & Backup & Lockfiles
@@ -139,7 +139,7 @@
 ;; http://www.emacswiki.org/cgi-bin/wiki/ShowParenMode
 (when (fboundp 'show-paren-mode)
   (show-paren-mode t)
-  (setq show-paren-style 'parenthesis))
+  (defvar show-paren-style 'parenthesis))
 
 ;; Overrride the default function param
 (defun emacs-session-filename (SESSION-ID)
@@ -148,22 +148,23 @@
   )
 
 ;; bookmarks
-(setq bookmark-default-file "~/.emacs.d/data/bookmarks" ;; bookmarks
-  bookmark-save-flag 1)                            ;; autosave each change
+(defvar bookmark-default-file "~/.emacs.d/data/bookmarks")
+;; autosave each change
+(defvar bookmark-save-flag 1)
 
-;; savehist: save some history
-(setq savehist-additional-variables    ;; also save...
-  '(search ring regexp-search-ring)    ;; ... my search entries
-  savehist-autosave-interval 60        ;; save every minute (default: 5 min)
-  savehist-file "~/.emacs.d/cache/savehist")   ;; keep my home clean
+;; savehist: save my search entries
+(defvar savehist-additional-variables '(search ring regexp-search-ring))
+;; save every minute (default: 5 min)
+(defvar savehist-autosave-interval 60)
+;; keep my home clean
+(defvar savehist-file "~/.emacs.d/cache/savehist")
 (savehist-mode t)                      ;; do customization before activation
 
 ;; we need a bit more funky pattern, as tramp will start $SHELL
 ;; (sudo -s), ie., zsh for root user
 (setq shell-prompt-pattern "^[^a-zA-Z].*[#$%>] *")
-(setq
-  tramp-default-method "ssh"
-  tramp-persistency-file-name "~/.emacs.d/cache/tramp")
+(defvar tramp-default-method "ssh")
+(defvar tramp-persistency-file-name "~/.emacs.d/cache/tramp")
 
 ;; turkish asciify && deasciify
 ;; -- (load-file "~/.elisp/turkish.el")
@@ -248,18 +249,12 @@
 ;; init duplicate lines
 (require 'init-duplicate)
 
-(setq puppet-indent-levet 4)
-
-
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-;; Use 2 space for indenting html files
-(setq web-mode-markup-indent-offset 4)
 
 (elpy-enable)
 
@@ -271,6 +266,8 @@
 
 ;; Syntax Check For All Type Code
 (global-flycheck-mode)
+;; Load all *.el files
+(setq-default flycheck-emacs-lisp-load-path 'inherit)
 ;;; emacs.el ends here
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
