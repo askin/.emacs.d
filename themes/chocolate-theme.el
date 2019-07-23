@@ -57,6 +57,7 @@
   (chocolate-syntax-light     "#4B393E")
   (chocolate-syntax-bg        "#33272A")
   (chocolate-syntax-bg-dark   "#261D1F")
+  (chocolate-syntax-bg-light  "#412E32")
   (chocolate-syntax-accent    "#F88425")
   (chocolate-syntax-renamed   "#329fff")
   (chocolate-syntax-added     "#43d089")
@@ -77,9 +78,10 @@
   (mode-line-inactive (:foreground chocolate-hue-6-3 :background chocolate-hue-6 :box nil))
   (fringe (:background chocolate-syntax-bg))
   (linum (:foreground chocolate-hue-4-2))
-  (region (:background chocolate-syntax-light :distant-foreground chocolate-hue-4))
+  (region (:background chocolate-syntax-light :distant-foreground chocolate-hue-4 :weight 'bold))
+  ;; (region (:background chocolate-dark-yellow :distant-foreground chocolate-hue-4 :weight 'bold))
   (secondary-selection (:background chocolate-syntax-light))
-  (hl-line (:background chocolate-syntax-light))
+  (hl-line (:background chocolate-syntax-bg-light))
 
   ;; Built-in syntax
   (font-lock-builtin-face (:foreground chocolate-syntax-accent))
@@ -1638,7 +1640,6 @@
 
 ;;;###autoload
 (and load-file-name
-     (boundp 'custom-theme-load-path)
      (add-to-list 'custom-theme-load-path
                   (file-name-as-directory
                    (file-name-directory load-file-name))))
