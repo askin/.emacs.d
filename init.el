@@ -281,16 +281,45 @@
 ;; (load-theme 'solarized-light t)
 ;; (load-theme 'solarized-dark t)
 
+(global-anzu-mode +1)
+
 (require 'spaceline-all-the-icons)
+(use-package spaceline-colors :after spaceline-all-the-icons
+  :config (advice-add 'load-theme :after 'spaceline-update-faces))
+
 (use-package spaceline-all-the-icons
+  :load-path "etc/elisp-packages/spaceline-all-the-icons"
   :after spaceline
-  :config (spaceline-all-the-icons-theme))
+  :config
+  (setq spaceline-all-the-icons-icon-set-modified 'toggle
+        spaceline-all-the-icons-icon-set-dedicated 'pin
+        spaceline-all-the-icons-icon-set-flycheck-slim 'dots
+        spaceline-all-the-icons-flycheck-alternate t
+        spaceline-all-the-icons-icon-set-window-numbering 'circle
+        spaceline-all-the-icons-highlight-file-name t
+        spaceline-all-the-icons-hide-long-buffer-path t
+        spaceline-all-the-icons-separator-type 'none)
+  (spaceline-toggle-all-the-icons-buffer-position-on)
+  (spaceline-all-the-icons--setup-paradox)
+  (spaceline-all-the-icons--setup-neotree)
+  (spaceline-all-the-icons--setup-anzu)
+  ; (spaceline-all-the-icons-theme)
+  )
 
 (spaceline-all-the-icons--setup-anzu)            ;; Enable anzu searching
 (spaceline-all-the-icons--setup-package-updates) ;; Enable package update indicator
 (spaceline-all-the-icons--setup-git-ahead)       ;; Enable # of commits ahead of upstream in git
 (spaceline-all-the-icons--setup-paradox)         ;; Enable Paradox mode line
 (spaceline-all-the-icons--setup-neotree)         ;; Enable Neotree mode line
+
+(use-package eyebrowse :ensure t
+  :config
+  (eyebrowse-mode)
+  (setq spaceline-all-the-icons-icon-set-eyebrowse-slot 'string
+        eyebrowse-mode-line-left-delimiter ""
+        eyebrowse-mode-line-style 'smart
+        eyebrowse-mode-line-separator " | ")
+  (eyebrowse-rename-window-config 1 "emacs"))
 
 (provide 'init)
 ;;; init.el ends here
