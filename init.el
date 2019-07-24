@@ -303,8 +303,7 @@
   (spaceline-all-the-icons--setup-paradox)
   (spaceline-all-the-icons--setup-neotree)
   (spaceline-all-the-icons--setup-anzu)
-  ; (spaceline-all-the-icons-theme)
-  )
+  (spaceline-all-the-icons-theme))
 
 (spaceline-all-the-icons--setup-anzu)            ;; Enable anzu searching
 (spaceline-all-the-icons--setup-package-updates) ;; Enable package update indicator
