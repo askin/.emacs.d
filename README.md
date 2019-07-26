@@ -15,6 +15,9 @@ After all packages installed, install latest fonts.
 * Run elisp code `C-x C-e`
 * Goto line `C-c g`
 * Comment region or block `C-c c`
+* Start defining macro `<F3>` or `C-x (`
+* End defining macro `<F4>` or `C-x )`
+  * Examle usage `<F3> M-f foo <F4>`
 
 # Key bindings for eyebrowse-mode
 The default key bindings are:
