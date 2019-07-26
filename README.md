@@ -29,3 +29,14 @@ The default key bindings are:
 | `C-c C-w 0` | Switch to window config `0`      |
 | ...         | ...                              |
 | `C-c C-w 9` | Switch to window config `9`      |
+
+# Emacs Bookmark
+
+| Key bind                 | Description                                                        |
+|--------------------------|--------------------------------------------------------------------|
+| `C-x r m <RET>`          | Set the bookmark for the visited file, at point.                   |
+| `C-x r m bookmark <RET>` | Set the bookmark named bookmark at point (bookmark-set).           |
+| `C-x r M bookmark <RET>` | Like C-x r m, but don't overwrite an existing bookmark.            |
+| `C-x r b bookmark <RET>` | Jump to the bookmark named bookmark (bookmark-jump).               |
+| `C-x r l`                | List all bookmarks (list-bookmarks).                               |
+| `M-x bookmark-save`      | Save all the current bookmark values in the default bookmark file. |
