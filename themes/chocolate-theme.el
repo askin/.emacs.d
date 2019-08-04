@@ -452,6 +452,10 @@
   (paradox-mode-line-face
    (:weight 'normal :inherit
             ('font-lock-keyword-face 'mode-line-buffer-id)))
+
+  (anzu-mode-line
+   (:foreground chocolate-hue-1-2 :inherit :weight 'bold))
+
   (paradox-commit-tag-face
    (:box 1 :foreground chocolate-hue-3 :background chocolate-hue-2))
   (paradox-highlight-face
