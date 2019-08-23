@@ -27,6 +27,27 @@
 (add-to-list 'load-path site-lisp-dir)
 
 (require 'package)
+(setq package-check-signature nil)
+(setq package-archives ())
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (proto (if no-ssl "http" "https")))
+  (when no-ssl
+    (warn "\
+Your version of Emacs does not support SSL connections,
+which is unsafe because it allows man-in-the-middle attacks.
+There are two things you can do about this warning:
+1. Install an Emacs version that does support SSL and be safe.
+2. Remove this warning from your init file so you won't see it again."))
+  ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
+  ;; (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+  (add-to-list 'package-archives (cons "melpa" (concat proto "://elpa.gnu.org/packages/")) t)
+  ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+  (when (< emacs-major-version 24)
+    ;; For important compatibility libraries like cl-lib
+    (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
+
+(package-initialize)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -36,18 +57,9 @@
  '(bmkp-last-as-first-bookmark-file (expand-file-name "data/bookmarks" user-emacs-directory))
  '(package-selected-packages
    (quote
-    (projectile gist ssh-config-mode dash gruvbox-theme all-the-icons-ivy use-package spaceline-all-the-icons
-                markdown-preview-mode dockerfile-mode company-php json-mode magit markdown-mode helm flycheck web-mode
-                yaml-mode rainbow-delimiters vue-mode php-mode elpy nginx-mode anzu))))
-
-;; Add melpa to package repos
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/"))
-
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+    (eyebrowse projectile gist ssh-config-mode dash gruvbox-theme all-the-icons-ivy use-package spaceline-all-the-icons markdown-preview-mode dockerfile-mode company-php json-mode magit markdown-mode helm flycheck web-mode yaml-mode rainbow-delimiters vue-mode php-mode elpy nginx-mode anzu))))
 
 (setq package-pinned-packages '())
-(package-initialize)
 
 (unless (file-exists-p "~/.emacs.d/elpa/archives/melpa-stable")
   (package-refresh-contents))
