@@ -58,7 +58,7 @@ There are two things you can do about this warning:
  '(bmkp-last-as-first-bookmark-file (expand-file-name "data/bookmarks" user-emacs-directory))
  '(package-selected-packages
    (quote
-    (eyebrowse projectile gist ssh-config-mode dash gruvbox-theme all-the-icons-ivy use-package spaceline-all-the-icons markdown-preview-mode dockerfile-mode company-php json-mode magit markdown-mode helm flycheck web-mode yaml-mode rainbow-delimiters vue-mode php-mode elpy nginx-mode anzu))))
+    (pyvenv ac-emacs-eclim lsp-mode projectile gist ssh-config-mode dash gruvbox-theme all-the-icons-ivy use-package spaceline-all-the-icons markdown-preview-mode dockerfile-mode company-php json-mode magit markdown-mode helm flycheck web-mode yaml-mode rainbow-delimiters vue-mode php-mode elpy nginx-mode anzu))))
 
 (setq package-pinned-packages '())
 
@@ -295,42 +295,46 @@ There are two things you can do about this warning:
 
 (global-anzu-mode +1)
 
-(require 'spaceline-all-the-icons)
-(use-package spaceline-colors :after spaceline-all-the-icons
-  :config (advice-add 'load-theme :after 'spaceline-update-faces))
+;; (require 'spaceline-all-the-icons)
+;; (use-package spaceline-colors :after spaceline-all-the-icons
+;;   :config (advice-add 'load-theme :after 'spaceline-update-faces))
 
-(use-package spaceline-all-the-icons
-  :load-path "etc/elisp-packages/spaceline-all-the-icons"
-  :after spaceline
-  :config
-  (setq spaceline-all-the-icons-icon-set-modified 'toggle
-        spaceline-all-the-icons-icon-set-dedicated 'pin
-        spaceline-all-the-icons-icon-set-flycheck-slim 'dots
-        spaceline-all-the-icons-flycheck-alternate t
-        spaceline-all-the-icons-icon-set-window-numbering 'circle
-        spaceline-all-the-icons-highlight-file-name t
-        spaceline-all-the-icons-hide-long-buffer-path t
-        spaceline-all-the-icons-separator-type 'none)
-  (spaceline-toggle-all-the-icons-buffer-position-on)
-  (spaceline-all-the-icons--setup-paradox)
-  (spaceline-all-the-icons--setup-neotree)
-  (spaceline-all-the-icons--setup-anzu)
-  (spaceline-all-the-icons-theme))
+;; (use-package spaceline-all-the-icons
+;;   :load-path "etc/elisp-packages/spaceline-all-the-icons"
+;;   :after spaceline
+;;   :config
+;;   (setq spaceline-all-the-icons-icon-set-modified 'toggle
+;;         spaceline-all-the-icons-icon-set-dedicated 'pin
+;;         spaceline-all-the-icons-icon-set-flycheck-slim 'dots
+;;         spaceline-all-the-icons-flycheck-alternate t
+;;         spaceline-all-the-icons-icon-set-window-numbering 'circle
+;;         spaceline-all-the-icons-highlight-file-name t
+;;         spaceline-all-the-icons-hide-long-buffer-path t
+;;         spaceline-all-the-icons-separator-type 'none)
+;;   (spaceline-toggle-all-the-icons-buffer-position-on)
+;;   (spaceline-all-the-icons--setup-paradox)
+;;   (spaceline-all-the-icons--setup-neotree)
+;;   (spaceline-all-the-icons--setup-anzu)
+;;   (spaceline-all-the-icons-theme))
 
-(spaceline-all-the-icons--setup-anzu)            ;; Enable anzu searching
-(spaceline-all-the-icons--setup-package-updates) ;; Enable package update indicator
-(spaceline-all-the-icons--setup-git-ahead)       ;; Enable # of commits ahead of upstream in git
-(spaceline-all-the-icons--setup-paradox)         ;; Enable Paradox mode line
-(spaceline-all-the-icons--setup-neotree)         ;; Enable Neotree mode line
+;; (spaceline-all-the-icons--setup-anzu)            ;; Enable anzu searching
+;; (spaceline-all-the-icons--setup-package-updates) ;; Enable package update indicator
+;; (spaceline-all-the-icons--setup-git-ahead)       ;; Enable # of commits ahead of upstream in git
+;; (spaceline-all-the-icons--setup-paradox)         ;; Enable Paradox mode line
+;; (spaceline-all-the-icons--setup-neotree)         ;; Enable Neotree mode line
 
-(use-package eyebrowse :ensure t
-  :config
-  (eyebrowse-mode)
-  (setq spaceline-all-the-icons-icon-set-eyebrowse-slot 'string
-        eyebrowse-mode-line-left-delimiter ""
-        eyebrowse-mode-line-style 'smart
-        eyebrowse-mode-line-separator " | ")
-  (eyebrowse-rename-window-config 1 "emacs"))
+;; (use-package eyebrowse :ensure t
+;;   :config
+;;   (eyebrowse-mode)
+;;   (setq spaceline-all-the-icons-icon-set-eyebrowse-slot 'string
+;;         eyebrowse-mode-line-left-delimiter ""
+;;         eyebrowse-mode-line-style 'smart
+;;         eyebrowse-mode-line-separator " | ")
+;;   (eyebrowse-rename-window-config 1 "emacs"))
+
+
+(defun insert-current-date () (interactive)
+    (insert (shell-command-to-string "echo -n $(date +\"%Y-%m-%d %H:%M:%S\")")))
 
 (provide 'init)
 ;;; init.el ends here
