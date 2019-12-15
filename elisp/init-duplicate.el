@@ -1,3 +1,8 @@
+; Emacs 26 has not insert-string
+(if (> emacs-major-version 25)
+    (defalias 'insert-string 'insert)
+  )
+
 (defun djcb-duplicate-line (&optional commentfirst)
   "comment line at point; if COMMENTFIRST is non-nil, comment the original"
   (interactive)
