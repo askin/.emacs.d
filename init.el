@@ -17,7 +17,8 @@
       ";; scratch buffer created -- happy hacking\n")
 
 (setq inhibit-startup-message t          ;; don't show ...
-      inhibit-startup-echo-area-message t)   ;; ... startup messages
+      inhibit-startup-echo-area-message t
+      visible-bell 2)   ;; ... startup messages
 
 ;; Set path to dependencies
 (defvar site-lisp-dir
