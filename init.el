@@ -88,8 +88,8 @@ There are two things you can do about this warning:
 (setq-default indent-tabs-mode t)
 
 ;; C indent with 4 space
-;; (setq c-default-style "bsd"
-;;      c-basic-offset 4)
+(setq c-default-style "bsd"
+      c-basic-offset 4)
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
