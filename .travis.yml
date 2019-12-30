@@ -9,7 +9,8 @@ env:
    # - EVM_EMACS=emacs-git-snapshot-travis
 
 before_script:
-  - sudo apt-get install libgnutls30
+  - sudo apt-get update
+  - sudo apt-get install libgnutls30 -y
   - mv -f ../.emacs.d ~/.emacs.d
   - curl -fsSkL https://gist.github.com/rejeep/ebcd57c3af83b049833b/raw > x.sh && source ./x.sh
   - evm install $EVM_EMACS --use --skip
