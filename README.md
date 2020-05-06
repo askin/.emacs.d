@@ -27,6 +27,9 @@ After all packages installed, install latest fonts.
   * Examle usage `<F3> M-f foo <F4>`
 * Open remote file or directory `C-x C-f` `/ssh:remote-machine:~`
 * Open remote file or directory as root `C-x C-f` `/ssh:remote-machine|sudo:root@remote-machine:~`
+* Add new line while replace-string `C-q C-j`
+  * `C-q`: `M-x quoted-insert`
+  * `C-j`: New line
 
 # Key bindings for eyebrowse-mode
 The default key bindings are:
