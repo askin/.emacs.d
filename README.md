@@ -30,6 +30,10 @@ After all packages installed, install latest fonts.
 * Add new line while replace-string `C-q C-j`
   * `C-q`: `M-x quoted-insert`
   * `C-j`: New line
+* Rename multiple files
+  * Enter dired `C-x d` or `C-x f`
+  * Switch to edit mode `C-x C-q`
+  * After editing save with `C-c C-c`
 
 # Key bindings for eyebrowse-mode
 The default key bindings are:
