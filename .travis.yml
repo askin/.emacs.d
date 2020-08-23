@@ -8,7 +8,7 @@ env:
 
 before_script:
   - sudo apt-get update
-  - sudo apt-get install libgnutls30 -y
+  - sudo apt-get install libgnutls30 gnutls-bin -y
   - mv -f ../.emacs.d ~/.emacs.d
   - export PATH="/home/travis/.evm/bin:$PATH"
   - export PATH="/home/travis/.cask/bin:$PATH"
