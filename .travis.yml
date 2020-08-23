@@ -15,7 +15,7 @@ before_script:
   - git clone https://github.com/rejeep/evm.git /home/travis/.evm
   - evm config path /tmp
   - evm install emacs-24.3-travis --use --skip
-  - curl -fsSkL https://raw.github.com/cask/cask/master/go | python
+  - curl -fsSkL https://raw.githubusercontent.com/cask/cask/master/go | python
   - evm install $EVM_EMACS --use --skip
   # - mkdir -p lib && curl https://raw.githubusercontent.com/nschum/elisp-lint/stable/elisp-lint.el > lib/elisp-lint.el
 
