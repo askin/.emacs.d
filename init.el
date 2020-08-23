@@ -58,7 +58,7 @@ There are two things you can do about this warning:
  '(bmkp-last-as-first-bookmark-file (expand-file-name "data/bookmarks" user-emacs-directory))
  '(package-selected-packages
    (quote
-    (go-mode pyvenv ac-emacs-eclim lsp-mode projectile gist ssh-config-mode dash gruvbox-theme all-the-icons-ivy use-package spaceline-all-the-icons markdown-preview-mode dockerfile-mode company-php json-mode magit markdown-mode helm flycheck web-mode yaml-mode rainbow-delimiters vue-mode php-mode elpy nginx-mode anzu))))
+    (typescript-mode go-mode pyvenv ac-emacs-eclim lsp-mode projectile gist ssh-config-mode dash gruvbox-theme all-the-icons-ivy use-package spaceline-all-the-icons markdown-preview-mode dockerfile-mode company-php json-mode magit markdown-mode helm flycheck web-mode yaml-mode rainbow-delimiters vue-mode php-mode elpy nginx-mode anzu))))
 
 (setq package-pinned-packages '())
 
@@ -88,8 +88,10 @@ There are two things you can do about this warning:
 (setq-default indent-tabs-mode t)
 
 ;; C indent with 4 space
-(setq c-default-style "bsd"
-      c-basic-offset 4)
+;; (setq c-default-style "bsd"
+;;      c-basic-offset 4)
+
+(setq-default c-basic-offset 4)
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
@@ -145,6 +147,7 @@ There are two things you can do about this warning:
 
 ;; Remove White Spaces
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+(remove-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (setq require-final-newline t)           ;; end files with a newline
 
@@ -227,6 +230,7 @@ There are two things you can do about this warning:
 ;; open .md and .markdown files with markdown mode
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md.erb$" . markdown-mode))
 
 ;; Post current buffer to gist and browse it (require gist)
 (defun gist-buffer-private-browse ()
@@ -334,7 +338,12 @@ There are two things you can do about this warning:
 
 
 (defun insert-current-date () (interactive)
-    (insert (shell-command-to-string "echo -n $(date +\"%Y-%m-%d %H:%M:%S\")")))
+       (insert (shell-command-to-string "echo -n $(date +\"%Y-%m-%d %H:%M:%S\")")))
+
+(setq js-indent-level 2)
 
 (provide 'init)
 ;;; init.el ends here
+
+
+(setq web-mode-markup-indent-offset 2)
