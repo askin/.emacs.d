@@ -119,17 +119,6 @@ There are two things you can do about this warning:
 ;; show whitespaces at the end of the line
 (setq show-trailing-whitespace t)
 
-;; Remote Emacs
-(require 'tramp)
-
-;; Scrolling
-;; (setq
-;;  scroll-margin 0
-;;  scroll-conservatively 100000
-;;  scroll-preserve-screen-position 1)
-
-(column-number-mode t)
-
 ;; Major Mode Customization
 (setq-default auto-fill-function 'do-auto-fill)
 (setq initial-scratch-message nil)
@@ -142,9 +131,6 @@ There are two things you can do about this warning:
 (setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
 ;; Do not create lock file
 (setq create-lockfiles nil)
-
-;; use local directory to backup with tramp
-(setq tramp-backup-directory-alist backup-directory-alist)
 
 ;; Remove White Spaces
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -179,24 +165,17 @@ There are two things you can do about this warning:
 ;; we need a bit more funky pattern, as tramp will start $SHELL
 ;; (sudo -s), ie., zsh for root user
 (setq shell-prompt-pattern "^[^a-zA-Z].*[#$%>] *")
-(defvar tramp-default-method "ssh")
-(defvar tramp-persistency-file-name "~/.emacs.d/cache/tramp")
 
 ;; turkish asciify && deasciify
 ;; -- (load-file "~/.elisp/turkish.el")
 
 ;; ssh-config-mode
-
-;; -- (setq load-path (cons "~/.elisp/ssh-config-mode-el/" load-path))
-;; -- (load-file "~/.elisp/ssh-config-mode-el/ssh-config-mode.el")
-
 (autoload 'ssh-config-mode "ssh-config-mode" t)
 (add-to-list 'auto-mode-alist '("/\\.ssh/config\\'"     . ssh-config-mode))
 (add-to-list 'auto-mode-alist '("/sshd?_config\\'"      . ssh-config-mode))
 (add-to-list 'auto-mode-alist '("/known_hosts\\'"       . ssh-known-hosts-mode))
 (add-to-list 'auto-mode-alist '("/authorized_keys2?\\'" . ssh-authorized-keys-mode))
 (add-hook 'ssh-config-mode-hook 'turn-on-font-lock)
-;; ;;;;;;;;;;;;;;;
 
 ;; activate uppercase - lowercase functions
 (global-hl-line-mode 1)
@@ -214,9 +193,6 @@ There are two things you can do about this warning:
 (if (version< emacs-version "27.0.90")
     (add-hook 'prog-mode-hook #'fci-mode)
   (add-hook 'prog-mode-hook #'display-fill-column-indicator-mode))
-;; (add-hook 'prog-mode-hook #'fci-mode)
-
-
 
 ;; Python pep8 hooks
 (add-hook 'python-mode-hook
@@ -251,9 +227,6 @@ There are two things you can do about this warning:
 ;; Browse the current url
 (global-set-key (kbd "C-c u") 'browse-url)
 
-;; add fill-column-indicator (fci-mode)
-(require 'init-fill-column-indicator)
-
 (require 'init-org-mode)
 
 (setq initial-scratch-message
@@ -262,12 +235,6 @@ There are two things you can do about this warning:
         (buffer-string)))
 
 (electric-pair-mode 1)
-
-;; VoiceXML Mode
-(add-to-list 'auto-mode-alist '("\\.vxml\\'" . nxml-mode))
-
-;; Puppet Mode
-(add-to-list 'auto-mode-alist '("\\.pp\\'" . puppet-mode))
 
 ;; init duplicate lines
 (require 'init-duplicate)
@@ -286,6 +253,7 @@ There are two things you can do about this warning:
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\.twig\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(setq web-mode-markup-indent-offset 2)
 
 ;; Syntax Check For All Type Code
 (global-flycheck-mode)
@@ -306,44 +274,6 @@ There are two things you can do about this warning:
 
 (global-anzu-mode +1)
 
-;; (require 'spaceline-all-the-icons)
-;; (use-package spaceline-colors :after spaceline-all-the-icons
-;;   :config (advice-add 'load-theme :after 'spaceline-update-faces))
-
-;; (use-package spaceline-all-the-icons
-;;   :load-path "etc/elisp-packages/spaceline-all-the-icons"
-;;   :after spaceline
-;;   :config
-;;   (setq spaceline-all-the-icons-icon-set-modified 'toggle
-;;         spaceline-all-the-icons-icon-set-dedicated 'pin
-;;         spaceline-all-the-icons-icon-set-flycheck-slim 'dots
-;;         spaceline-all-the-icons-flycheck-alternate t
-;;         spaceline-all-the-icons-icon-set-window-numbering 'circle
-;;         spaceline-all-the-icons-highlight-file-name t
-;;         spaceline-all-the-icons-hide-long-buffer-path t
-;;         spaceline-all-the-icons-separator-type 'none)
-;;   (spaceline-toggle-all-the-icons-buffer-position-on)
-;;   (spaceline-all-the-icons--setup-paradox)
-;;   (spaceline-all-the-icons--setup-neotree)
-;;   (spaceline-all-the-icons--setup-anzu)
-;;   (spaceline-all-the-icons-theme))
-
-;; (spaceline-all-the-icons--setup-anzu)            ;; Enable anzu searching
-;; (spaceline-all-the-icons--setup-package-updates) ;; Enable package update indicator
-;; (spaceline-all-the-icons--setup-git-ahead)       ;; Enable # of commits ahead of upstream in git
-;; (spaceline-all-the-icons--setup-paradox)         ;; Enable Paradox mode line
-;; (spaceline-all-the-icons--setup-neotree)         ;; Enable Neotree mode line
-
-;; (use-package eyebrowse :ensure t
-;;   :config
-;;   (eyebrowse-mode)
-;;   (setq spaceline-all-the-icons-icon-set-eyebrowse-slot 'string
-;;         eyebrowse-mode-line-left-delimiter ""
-;;         eyebrowse-mode-line-style 'smart
-;;         eyebrowse-mode-line-separator " | ")
-;;   (eyebrowse-rename-window-config 1 "emacs"))
-
-
 (defun insert-current-date () (interactive)
        (insert (shell-command-to-string "echo -n $(date +\"%Y-%m-%d %H:%M:%S\")")))
 
@@ -351,6 +281,3 @@ There are two things you can do about this warning:
 
 (provide 'init)
 ;;; init.el ends here
-
-
-(setq web-mode-markup-indent-offset 2)
