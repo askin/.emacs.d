@@ -3,10 +3,8 @@ sudo: false
 dist: bionic
 
 env:
- - EVM_EMACS=emacs-25.2-travis
- - EVM_EMACS=emacs-25.3-travis
  - EVM_EMACS=emacs-26.2-travis
-   # - EVM_EMACS=emacs-git-snapshot-travis
+ - EVM_EMACS=emacs-27.1-travis
 
 before_script:
   - sudo apt-get update
