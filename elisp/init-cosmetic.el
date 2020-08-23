@@ -5,11 +5,6 @@
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
 
-;; Cursor
-(setq scroll-conservatively 1)
-(setq scroll-step 1)
-
-
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (set-scroll-bar-mode nil)
@@ -89,9 +84,10 @@
            (file-name-nondirectory (or (buffer-file-name) default-directory)))))
 
 ;; Show line numbers
-(global-linum-mode 1)
+(if (version<= "26.0.50" emacs-version )
+    (global-display-line-numbers-mode)
+  (global-linum-mode 0))
 
-(line-number-mode t)                     ;; show line numbers
 (column-number-mode t)                   ;; show column numbers
 (size-indication-mode t)                 ;; show file size (emacs 22+)
 

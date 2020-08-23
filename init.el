@@ -123,10 +123,11 @@ There are two things you can do about this warning:
 (require 'tramp)
 
 ;; Scrolling
-(setq
- scroll-margin 0
- scroll-conservatively 100000
- scroll-preserve-screen-position 1)
+;; (setq
+;;  scroll-margin 0
+;;  scroll-conservatively 100000
+;;  scroll-preserve-screen-position 1)
+
 (column-number-mode t)
 
 ;; Major Mode Customization
@@ -209,7 +210,13 @@ There are two things you can do about this warning:
 
 (add-hook 'python-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'prog-mode-hook #'fci-mode)
+
+(if (version< emacs-version "27.0.90")
+    (add-hook 'prog-mode-hook #'fci-mode)
+  (add-hook 'prog-mode-hook #'display-fill-column-indicator-mode))
+;; (add-hook 'prog-mode-hook #'fci-mode)
+
+
 
 ;; Python pep8 hooks
 (add-hook 'python-mode-hook
