@@ -10,12 +10,10 @@
 (setq scroll-step 1)
 
 
-;; No Bar - No menu
-(if (display-graphic-p)
-    (progn
-      (tool-bar-mode -1)
-      (scroll-bar-mode -1)
-      (set-scroll-bar-mode nil)))
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(set-scroll-bar-mode nil)
+(menu-bar-mode 0)
 
 ;; use setq-default to set it for /all/ modes
 (setq-default
