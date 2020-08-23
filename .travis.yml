@@ -10,7 +10,12 @@ before_script:
   - sudo apt-get update
   - sudo apt-get install libgnutls30 -y
   - mv -f ../.emacs.d ~/.emacs.d
-  - curl -fsSkL https://gist.github.com/rejeep/ebcd57c3af83b049833b/raw > x.sh && source ./x.sh
+  - export PATH="/home/travis/.evm/bin:$PATH"
+  - export PATH="/home/travis/.cask/bin:$PATH"
+  - git clone https://github.com/rejeep/evm.git /home/travis/.evm
+  - evm config path /tmp
+  - evm install emacs-24.3-travis --use --skip
+  - curl -fsSkL https://raw.github.com/cask/cask/master/go | python
   - evm install $EVM_EMACS --use --skip
   # - mkdir -p lib && curl https://raw.githubusercontent.com/nschum/elisp-lint/stable/elisp-lint.el > lib/elisp-lint.el
 
