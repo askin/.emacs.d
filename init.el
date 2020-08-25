@@ -4,7 +4,7 @@
 ;;; Code:
 
 
-(set-language-environment 'turkish)
+(set-language-environment 'english)
 (setq locale-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
@@ -192,7 +192,7 @@ There are two things you can do about this warning:
 
 (if (version< emacs-version "27.0.90")
     (add-hook 'prog-mode-hook #'fci-mode)
-  (add-hook 'prog-mode-hook #'display-fill-column-indicator-mode))
+  (global-display-fill-column-indicator-mode))
 
 ;; Python pep8 hooks
 (add-hook 'python-mode-hook
