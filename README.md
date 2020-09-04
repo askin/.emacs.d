@@ -42,6 +42,7 @@ After all packages installed, install latest fonts.
   ```
   * To upper `C-x C-u`
   * To lower `C-x C-l`
+* Insert a link to document `C-c C-l`
 
 # Key bindings for eyebrowse-mode
 The default key bindings are:
