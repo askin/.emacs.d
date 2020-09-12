@@ -43,6 +43,10 @@ After all packages installed, install latest fonts.
   * To upper `C-x C-u`
   * To lower `C-x C-l`
 * Insert a link to document `C-c C-l`
+* Repeating a Command [details...](https://www.gnu.org/software/emacs/manual/html_node/emacs/Repeating.html "More Details...")
+  * Repeat last command `C-x z`
+  * Repeat n-times (10-times for example) `C-u 1 0 command`
+    * Delete 10 character `C-u 1 0 C-d`
 
 # Key bindings for eyebrowse-mode
 The default key bindings are:
