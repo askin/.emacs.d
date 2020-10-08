@@ -120,7 +120,7 @@ There are two things you can do about this warning:
 (setq show-trailing-whitespace t)
 
 ;; Major Mode Customization
-(setq-default auto-fill-function 'do-auto-fill)
+(setq-default auto-fill-function nil)
 (setq initial-scratch-message nil)
 
 ;; Autosave & Backup & Lockfiles
@@ -213,6 +213,7 @@ There are two things you can do about this warning:
 ;; open .md and .markdown files with markdown mode
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.erb$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.md.erb$" . markdown-mode))
 
 ;; Post current buffer to gist and browse it (require gist)
@@ -238,6 +239,7 @@ There are two things you can do about this warning:
 
 ;; init duplicate lines
 (require 'init-duplicate)
+(require 'init-openweekly-plan)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -253,7 +255,7 @@ There are two things you can do about this warning:
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\.twig\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(setq web-mode-markup-indent-offset 2)
+(setq web-mode-markup-indent-offset 4)
 
 ;; Syntax Check For All Type Code
 (global-flycheck-mode)
@@ -281,3 +283,5 @@ There are two things you can do about this warning:
 
 (provide 'init)
 ;;; init.el ends here
+
+;; 'init-openweekly-plan
