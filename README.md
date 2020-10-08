@@ -47,6 +47,7 @@ After all packages installed, install latest fonts.
   * Repeat last command `C-x z`
   * Repeat n-times (10-times for example) `C-u 1 0 command`
     * Delete 10 character `C-u 1 0 C-d`
+* Select python virtual env `M-x pyvenv-workon`
 
 # Key bindings for eyebrowse-mode
 The default key bindings are:
