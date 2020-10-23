@@ -48,6 +48,10 @@ After all packages installed, install latest fonts.
   * Repeat n-times (10-times for example) `C-u 1 0 command`
     * Delete 10 character `C-u 1 0 C-d`
 * Select python virtual env `M-x pyvenv-workon`
+* Select all buffer `C-x h`
+* Json Pretty Print
+  * Buffer: `M-x json-pretty-print-buffer`
+  * Region: `M-x json-pretty-print`
 
 # Key bindings for eyebrowse-mode
 The default key bindings are:
