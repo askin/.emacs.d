@@ -5,10 +5,12 @@
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
 
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-(set-scroll-bar-mode nil)
-(menu-bar-mode 0)
+(if (display-graphic-p)
+    (progn
+      (tool-bar-mode -1)
+      (scroll-bar-mode -1)
+      (set-scroll-bar-mode nil)
+      (menu-bar-mode 0)))
 
 ;; use setq-default to set it for /all/ modes
 (setq-default
