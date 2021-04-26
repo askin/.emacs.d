@@ -57,7 +57,7 @@ There are two things you can do about this warning:
  ;; If there is more than one, they won't work right.
  '(bmkp-last-as-first-bookmark-file (expand-file-name "data/bookmarks" user-emacs-directory))
  '(package-selected-packages
-   '(diff-hl typescript-mode go-mode pyvenv ac-emacs-eclim lsp-mode projectile gist ssh-config-mode dash gruvbox-theme all-the-icons-ivy use-package spaceline-all-the-icons markdown-preview-mode dockerfile-mode company-php json-mode magit markdown-mode helm flycheck web-mode yaml-mode rainbow-delimiters vue-mode php-mode elpy nginx-mode anzu)))
+   '(yaml diff-hl multiple-cursors typescript-mode go-mode pyvenv ac-emacs-eclim lsp-mode projectile gist ssh-config-mode dash gruvbox-theme all-the-icons-ivy use-package spaceline-all-the-icons markdown-preview-mode dockerfile-mode company-php json-mode magit markdown-mode helm flycheck web-mode yaml-mode rainbow-delimiters vue-mode php-mode elpy nginx-mode anzu)))
 
 (setq package-pinned-packages '())
 
@@ -85,6 +85,8 @@ There are two things you can do about this warning:
 ;; Indentation
 ;; (setq standart-indent 4)
 (setq-default indent-tabs-mode t)
+
+(setq nxml-child-indent 4 nxml-attribute-indent 4)
 
 ;; C indent with 4 space
 ;; (setq c-default-style "bsd"
@@ -166,7 +168,7 @@ There are two things you can do about this warning:
 (setq shell-prompt-pattern "^[^a-zA-Z].*[#$%>] *")
 
 ;; turkish asciify && deasciify
-;; -- (load-file "~/.elisp/turkish.el")
+(load-file "~/.emacs.d/elisp/turkish.el")
 
 ;; ssh-config-mode
 (autoload 'ssh-config-mode "ssh-config-mode" t)
@@ -286,3 +288,15 @@ There are two things you can do about this warning:
 ;;; init.el ends here
 
 ;; 'init-openweekly-plan
+
+
+;; (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+;; (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+;; (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+;; https://github.com/magnars/multiple-cursors.el
+
+(global-set-key (kbd "M-3") #'mc/mark-next-like-this)
+
+
+(setq elpy-rpc-python-command "python2.7")

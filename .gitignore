@@ -2,3 +2,6 @@ elpa
 var
 tramp
 elpy
+%backup%~
+.mc-lists.el
+transient/

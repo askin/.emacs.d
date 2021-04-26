@@ -101,7 +101,7 @@
  uniquify-after-kill-buffer-p t
  uniquify-ignore-buffers-re "^\\*")
 
-(setq default-frame-alist '((font . "Fira Code-10")))
+(setq default-frame-alist '((font . "Fira Code-12")))
 
 ;; Font Size
 (set-face-attribute 'default nil :height 105)
