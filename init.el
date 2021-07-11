@@ -272,16 +272,7 @@ There are two things you can do about this warning:
 
 (global-anzu-mode +1)
 
-(defun insert-current-date () (interactive)
-       (insert (shell-command-to-string "echo -n $(date +\"%Y-%m-%d %H:%M:%S\")")))
-
 (setq js-indent-level 2)
-
-(provide 'init)
-;;; init.el ends here
-
-;; 'init-openweekly-plan
-
 
 ;; (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 ;; (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
@@ -293,3 +284,7 @@ There are two things you can do about this warning:
 
 
 (setq elpy-rpc-python-command "python2.7")
+(global-diff-hl-mode)
+
+(provide 'init)
+;;; init.el ends here
