@@ -11,6 +11,10 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
+(setq calendar-location-name "Izmir, TR")
+(setq calendar-latitude 38.46)
+(setq calendar-longitude 27.12)
+
 ;; configurations
 (fset 'yes-or-no-p 'y-or-n-p)            ;; enable y/n answers to yes/no
 (setq initial-scratch-message
@@ -57,7 +61,7 @@ There are two things you can do about this warning:
  ;; If there is more than one, they won't work right.
  '(bmkp-last-as-first-bookmark-file (expand-file-name "data/bookmarks" user-emacs-directory))
  '(package-selected-packages
-   '(yaml diff-hl multiple-cursors typescript-mode go-mode pyvenv ac-emacs-eclim lsp-mode projectile gist ssh-config-mode dash gruvbox-theme all-the-icons-ivy use-package spaceline-all-the-icons markdown-preview-mode dockerfile-mode company-php json-mode magit markdown-mode helm flycheck web-mode yaml-mode rainbow-delimiters vue-mode php-mode elpy nginx-mode anzu)))
+   '(theme-changer yaml diff-hl multiple-cursors typescript-mode go-mode pyvenv ac-emacs-eclim lsp-mode projectile gist ssh-config-mode dash gruvbox-theme all-the-icons-ivy use-package spaceline-all-the-icons markdown-preview-mode dockerfile-mode company-php json-mode magit markdown-mode helm flycheck web-mode yaml-mode rainbow-delimiters vue-mode php-mode elpy nginx-mode anzu)))
 
 (setq package-pinned-packages '())
 
@@ -265,17 +269,6 @@ There are two things you can do about this warning:
 ;; Load all *.el files
 (setq-default flycheck-emacs-lisp-load-path 'inherit)
 ;;; emacs.el ends here
-
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(load-theme 'chocolate t)
-;; (load-theme 'zenburn t)
-;; (load-theme 'anti-zenburn t)
-;; (load-theme 'labburn t)
-;; (load-theme 'gruvbox t)
-;; (load-theme 'Deviant t)
-;; (load-theme 'dracula t)
-;; (load-theme 'solarized-light t)
-;; (load-theme 'solarized-dark t)
 
 (global-anzu-mode +1)
 

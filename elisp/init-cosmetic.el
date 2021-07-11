@@ -12,6 +12,9 @@
       (set-scroll-bar-mode nil)
       (menu-bar-mode 0)))
 
+(require 'theme-changer)
+(change-theme 'gruvbox-light-hard 'gruvbox-dark-hard)
+
 ;; use setq-default to set it for /all/ modes
 (setq-default
  mode-line-format
@@ -101,11 +104,8 @@
  uniquify-after-kill-buffer-p t
  uniquify-ignore-buffers-re "^\\*")
 
-(setq default-frame-alist '((font . "Fira Code-12")))
-
-;; Font Size
-(set-face-attribute 'default nil :height 105)
-;; (set-face-attribute 'default nil :height 75)
+;; Set Font and Size
+(set-face-attribute 'default nil :font "Fira Code" :height 105)
 
 ;; Emacs Window Geometry
 (add-to-list 'default-frame-alist '(height . 40))
