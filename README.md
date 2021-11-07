@@ -49,9 +49,12 @@ After all packages installed, install latest fonts.
     * Delete 10 character `C-u 1 0 C-d`
 * Select python virtual env `M-x pyvenv-workon`
 * Select all buffer `C-x h`
-* Json Pretty Print
+* Json pretty print
   * Buffer: `M-x json-pretty-print-buffer`
   * Region: `M-x json-pretty-print`
+* Create temporary file or directory
+  * Create file with extension `M-x create-temp-file`
+  * Create directory `M-x create-temp-directory`
 
 # Key bindings for eyebrowse-mode
 The default key bindings are:

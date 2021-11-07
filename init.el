@@ -286,5 +286,7 @@ There are two things you can do about this warning:
 (setq elpy-rpc-python-command "python2.7")
 (global-diff-hl-mode)
 
+(require 'init-temp-files)
+
 (provide 'init)
 ;;; init.el ends here
