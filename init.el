@@ -61,11 +61,14 @@ There are two things you can do about this warning:
  ;; If there is more than one, they won't work right.
  '(bmkp-last-as-first-bookmark-file (expand-file-name "data/bookmarks" user-emacs-directory))
  '(package-selected-packages
-   '(theme-changer yaml diff-hl multiple-cursors typescript-mode go-mode pyvenv ac-emacs-eclim lsp-mode projectile gist ssh-config-mode dash gruvbox-theme all-the-icons-ivy use-package spaceline-all-the-icons markdown-preview-mode dockerfile-mode company-php json-mode magit markdown-mode helm flycheck web-mode yaml-mode rainbow-delimiters vue-mode php-mode elpy nginx-mode anzu)))
+   '(py-isort theme-changer po-mode yaml diff-hl multiple-cursors typescript-mode go-mode pyvenv ac-emacs-eclim lsp-mode projectile gist ssh-config-mode dash gruvbox-theme all-the-icons-ivy use-package spaceline-all-the-icons markdown-preview-mode dockerfile-mode company-php json-mode magit markdown-mode helm flycheck web-mode yaml-mode rainbow-delimiters php-mode elpy nginx-mode anzu)))
 
 (setq package-pinned-packages '())
 
-(package-install 'dash)
+;; Dash used for packages-install function
+(when (not (package-installed-p 'dash))
+  (package-install 'dash))
+
 (require 'dash)
 
 (defun packages-install (packages)
@@ -219,7 +222,11 @@ There are two things you can do about this warning:
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.erb$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.vue$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.md.erb$" . markdown-mode))
+
+;; FIXME: find a proper locatio
+(setq web-mode-enable-auto-indentation nil)
 
 ;; Post current buffer to gist and browse it (require gist)
 (defun gist-buffer-private-browse ()
@@ -245,13 +252,6 @@ There are two things you can do about this warning:
 ;; init duplicate lines
 (require 'init-duplicate)
 (require 'init-openweekly-plan)
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
 (elpy-enable)
 
