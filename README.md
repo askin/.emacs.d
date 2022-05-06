@@ -18,8 +18,8 @@ After all packages installed, install latest fonts.
 * Create gist from current buffer `C-c b`
 * Open region with default browser `C-c u`
 * Run elisp code `C-x C-e`
-* Goto line `C-c g`
-* Comment region or block `C-c c`
+* Goto line `M-g M-g`
+* Comment region or block `M-;`
 * Start defining macro `<F3>` or `C-x (`
 * End defining macro `<F4>` or `C-x )`
   * Examle usage `<F3> M-f foo <F4>`
@@ -53,6 +53,7 @@ After all packages installed, install latest fonts.
 * Create temporary file or directory
   * Create file with extension `M-x create-temp-file`
   * Create directory `M-x create-temp-directory`
+* Insert or align comment `M-;` or `M-x indent-for-comment`.
 
 # Key bindings for eyebrowse-mode
 The default key bindings are:

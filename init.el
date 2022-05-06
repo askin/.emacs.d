@@ -61,7 +61,7 @@ There are two things you can do about this warning:
  ;; If there is more than one, they won't work right.
  '(bmkp-last-as-first-bookmark-file (expand-file-name "data/bookmarks" user-emacs-directory))
  '(package-selected-packages
-   '(py-isort theme-changer po-mode yaml diff-hl multiple-cursors typescript-mode go-mode pyvenv ac-emacs-eclim lsp-mode projectile gist ssh-config-mode dash gruvbox-theme all-the-icons-ivy use-package spaceline-all-the-icons markdown-preview-mode dockerfile-mode company-php json-mode magit markdown-mode helm flycheck web-mode yaml-mode rainbow-delimiters php-mode elpy nginx-mode anzu)))
+   '(yafolding py-isort theme-changer po-mode yaml diff-hl multiple-cursors typescript-mode go-mode pyvenv ac-emacs-eclim lsp-mode projectile gist ssh-config-mode dash gruvbox-theme all-the-icons-ivy use-package spaceline-all-the-icons markdown-preview-mode dockerfile-mode company-php json-mode magit markdown-mode helm flycheck web-mode yaml-mode rainbow-delimiters php-mode elpy nginx-mode anzu)))
 
 (setq package-pinned-packages '())
 
@@ -108,8 +108,6 @@ There are two things you can do about this warning:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; KEYS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; General Keyboard Fixes
-(global-set-key (kbd "C-c g") 'goto-line)
-(global-set-key (kbd "C-c c") 'comment-or-uncomment-region)
 
 ;; Disable Ctrl Z
 (global-set-key (kbd "C-x C-z") nil)
@@ -119,8 +117,6 @@ There are two things you can do about this warning:
 
 ;; Browse selected url
 (global-set-key (kbd "C-c f") 'browse-url)  ;; Firefox
-;; (global-set-key (kbd "C-c s") 'speedbar)
-(global-set-key (kbd "C-x g") 'goto-line)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; KEYS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -260,9 +256,13 @@ There are two things you can do about this warning:
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\.twig\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(setq web-mode-markup-indent-offset 2)
-(setq web-mode-css-indent-offset 2)
-(setq web-mode-code-indent-offset 2)
+(add-to-list 'auto-mode-alist '("\\.mjml?\\'" . web-mode))
+
+(setq web-mode-markup-indent-offset 4)
+(setq web-mode-script-padding 0)
+(setq web-mode-code-indent-offset 4)
+(setq web-mode-style-padding 0)
+(setq web-mode-css-indent-offset 4)
 
 ;; Syntax Check For All Type Code
 (global-flycheck-mode)
@@ -271,8 +271,6 @@ There are two things you can do about this warning:
 ;;; emacs.el ends here
 
 (global-anzu-mode +1)
-
-(setq js-indent-level 2)
 
 ;; (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 ;; (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
@@ -290,3 +288,13 @@ There are two things you can do about this warning:
 
 (provide 'init)
 ;;; init.el ends here
+
+;;; I don't remember why?
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(global-set-key (kbd "M-RET")   'yafolding-toggle-element)
