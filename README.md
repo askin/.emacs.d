@@ -13,6 +13,35 @@ After all packages installed, install latest fonts.
 
     M-x all-the-icons-install-fonts
 
+# Run as a daemon
+Copy `emacs.service` to `~/.config/systemd/user/`
+
+Reload units
+```bash
+systemctl daemon-reloadreload --user
+```
+
+Enable emacs service to run startup
+```bash
+systemctl enableenable --user emacs
+```
+
+Start or stop emacs
+```bash
+systemctl start --user emacs
+systemctl stop --user emacs
+```
+
+Start emacs client on gui
+```
+emacsclient -c
+```
+
+Start emacs client on cli
+```
+emacsclient -t
+```
+
 # Emacs Tips
 * Rectangle Select `C-x space`
 * Create gist from current buffer `C-c b`
