@@ -1,8 +1,3 @@
-; Emacs 26 has not insert-string
-(if (> emacs-major-version 25)
-    (defalias 'insert-string 'insert)
-  )
-
 (defun djcb-duplicate-line (&optional commentfirst)
   "comment line at point; if COMMENTFIRST is non-nil, comment the original"
   (interactive)
@@ -12,7 +7,7 @@
   (let ((str (buffer-substring (region-beginning) (region-end))))
     (when commentfirst
     (comment-region (region-beginning) (region-end)))
-    (insert-string
+    (insert
       (concat (if (= 0 (forward-line 1)) "" "\n") str "\n"))
     (forward-line -1)))
 
