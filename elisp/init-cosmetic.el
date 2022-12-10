@@ -5,23 +5,33 @@
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
 
-(if (display-graphic-p)
-    (progn
-      (tool-bar-mode -1)
-      (scroll-bar-mode -1)
-      (set-scroll-bar-mode nil)
-      (menu-bar-mode 0)))
+(progn
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (set-scroll-bar-mode nil)
+  (menu-bar-mode 0))
 
 (require 'theme-changer)
 (change-theme 'gruvbox-light-hard 'gruvbox-dark-hard)
+
+(defadvice vc-mode-line (after strip-backend () activate)
+  (when (stringp vc-mode)
+    (let ((noback (replace-regexp-in-string
+                   (format "^ %s" (vc-backend buffer-file-name))
+                   " " vc-mode)))
+      (setq vc-mode noback))))
 
 ;; use setq-default to set it for /all/ modes
 (setq-default
  mode-line-format
  (list
   ;; the buffer name; the file name as a tool tip
-  '(:eval (propertize "%b " 'face 'font-lock-keyword-face
+  '(:eval (propertize "%b" 'face 'font-lock-keyword-face
                       'help-echo (buffer-file-name)))
+
+  '(:propertize (vc-mode vc-mode) face (:weight bold))
+
+  " "
 
   ;; line and column
   "(" ;; '%02' to set to 2 chars at least; prevents flickering

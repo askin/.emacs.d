@@ -5,3 +5,4 @@ elpy
 %backup%~
 .mc-lists.el
 transient/
+eln-cache/
