@@ -16,14 +16,18 @@ After all packages installed, install latest fonts.
 # Run as a daemon
 Copy `emacs.service` to `~/.config/systemd/user/`
 
+```bash
+cp emacs.service ~/.config/systemd/user/
+```
+
 Reload units
 ```bash
-systemctl daemon-reloadreload --user
+systemctl daemon-reload --user
 ```
 
 Enable emacs service to run startup
 ```bash
-systemctl enableenable --user emacs
+systemctl enable --user emacs
 ```
 
 Start or stop emacs
