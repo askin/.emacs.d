@@ -233,6 +233,7 @@
 ;; init duplicate lines
 (require 'init-duplicate)
 (require 'init-openweekly-plan)
+(require 'init-flatten-log-file)
 
 (elpy-enable)
 
