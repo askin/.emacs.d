@@ -115,11 +115,28 @@
  uniquify-ignore-buffers-re "^\\*")
 
 ;; Set Font and Size
+;; 28inch
+(set-face-attribute 'default nil :font "Fira Code" :height 95)
+;; 14inch
 (set-face-attribute 'default nil :font "Fira Code" :height 105)
+
+;; (set-face-attribute 'default nil :font "Monospace" :height 105)
+;; (set-face-attribute 'default (selected-frame) :height 90)
 
 ;; Emacs Window Geometry
 (add-to-list 'default-frame-alist '(height . 40))
 (add-to-list 'default-frame-alist '(width . 145))
+
+;; lambda to λ
+(defun my-pretty-lambda ()
+  "Make some word or string show as pretty Unicode symbols."
+  (setq prettify-symbols-alist
+        '(
+          ("lambda" . 955) ; λ
+          )))
+
+(add-hook 'scheme-mode-hook 'my-pretty-lambda)
+(global-prettify-symbols-mode 1)
 
 (provide 'init-cosmetic)
 ;;; init-cosmetic.el ends here
