@@ -6,3 +6,4 @@ elpy
 .mc-lists.el
 transient/
 eln-cache/
+tree-sitter/
