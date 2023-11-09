@@ -87,6 +87,7 @@ emacsclient -t
   * Create file with extension `M-x create-temp-file`
   * Create directory `M-x create-temp-directory`
 * Insert or align comment `M-;` or `M-x indent-for-comment`.
+* Insert `UUID` `M-x uuidgen`
 
 # Key bindings for eyebrowse-mode
 The default key bindings are:

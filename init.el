@@ -48,7 +48,7 @@
  ;; If there is more than one, they won't work right.
  '(bmkp-last-as-first-bookmark-file (expand-file-name "data/bookmarks" user-emacs-directory))
  '(package-selected-packages
-   '(py-isort theme-changer yaml diff-hl multiple-cursors typescript-mode go-mode pyvenv lsp-mode gist ssh-config-mode dash gruvbox-theme all-the-icons-ivy use-package spaceline-all-the-icons markdown-preview-mode dockerfile-mode company-php json-mode magit markdown-mode helm flycheck web-mode yaml-mode rainbow-delimiters php-mode nginx-mode anzu)))
+   '(uuidgen yaml py-isort theme-changer diff-hl multiple-cursors typescript-mode go-mode pyvenv lsp-mode gist ssh-config-mode dash gruvbox-theme all-the-icons-ivy use-package spaceline-all-the-icons markdown-preview-mode dockerfile-mode company-php json-mode magit markdown-mode helm flycheck web-mode rainbow-delimiters php-mode nginx-mode anzu)))
 
 (setq package-pinned-packages '())
 
