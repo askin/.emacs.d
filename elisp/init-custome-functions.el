@@ -1,7 +1,25 @@
-;;; init-temp-files -- Create and jump to temporary file or directory
+;;; init-flatten-log-file.el --- Flatten log files
 ;;; Commentary:
-;; Create and jump to temporary file or directory
+;; Flatten log files
+
 ;;; Code:
+(require 'dash)
+
+(defun flatten-log-file ()
+  "Flatten log files."
+  (interactive)
+  (let ((charlist '(("\\n" "\n") ("\\t" "\t"))))
+    (--each charlist
+      (goto-char (point-min))
+      (while (search-forward (car it) nil t)
+        (replace-match (car (cdr it)))))))
+
+;; Kill all buffers
+(defun close-all-buffers ()
+  "Close all buffers."
+  (interactive)
+  (mapc 'kill-buffer (buffer-list)))
+
 (defun create-temp-file (fname)
   "Create temp file, if FNAME is nil, file name will be random."
   (interactive "sWhat will be extension? ")
@@ -47,5 +65,34 @@
     )
   )
 
-(provide 'init-temp-files)
-;;; init-temp-files.el ends here
+(defun djcb-duplicate-line (&optional commentfirst)
+  "Duplicate line; if COMMENTFIRST is non-nil, comment the original."
+  (interactive)
+  (beginning-of-line)
+  (push-mark)
+  (end-of-line)
+  (let ((str (buffer-substring (region-beginning) (region-end))))
+    (when commentfirst
+      (comment-region (region-beginning) (region-end)))
+    (insert
+     (concat (if (= 0 (forward-line 1)) "" "\n") str "\n"))
+    (forward-line -1)))
+
+;; duplicate a line and comment the first
+(global-set-key
+ (kbd "C-c v")
+ (lambda()
+   (interactive)
+   (djcb-duplicate-line t)))
+
+;; duplicate a line
+(global-set-key
+ (kbd "C-c d")
+ (lambda()
+   (interactive)
+   (djcb-duplicate-line nil)))
+
+
+;; provide
+(provide 'init-custome-functions)
+;;; init-custome-functions.el ends here

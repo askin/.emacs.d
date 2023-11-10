@@ -7,3 +7,4 @@ elpy
 transient/
 eln-cache/
 tree-sitter/
+custom.el

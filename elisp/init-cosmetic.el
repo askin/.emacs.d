@@ -11,12 +11,6 @@
   (set-scroll-bar-mode nil)
   (menu-bar-mode 0))
 
-(require 'theme-changer)
-(setq calendar-location-name "Izmir, TR")
-(setq calendar-latitude 38.46)
-(setq calendar-longitude 27.12)
-(change-theme 'gruvbox-light-hard 'gruvbox-dark-hard)
-
 ;; format branch name
 (defadvice vc-mode-line (after strip-backend () activate)
   (when (stringp vc-mode)
