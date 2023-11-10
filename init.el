@@ -11,14 +11,8 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
-(setq calendar-location-name "Izmir, TR")
-(setq calendar-latitude 38.46)
-(setq calendar-longitude 27.12)
-
 ;; configurations
 (fset 'yes-or-no-p 'y-or-n-p)            ;; enable y/n answers to yes/no
-(setq initial-scratch-message
-      ";; scratch buffer created -- happy hacking\n")
 
 (setq inhibit-startup-message t          ;; don't show ...
       inhibit-startup-echo-area-message t
@@ -48,7 +42,7 @@
  ;; If there is more than one, they won't work right.
  '(bmkp-last-as-first-bookmark-file (expand-file-name "data/bookmarks" user-emacs-directory))
  '(package-selected-packages
-   '(uuidgen tree-sitter py-isort theme-changer diff-hl multiple-cursors typescript-mode go-mode pyvenv lsp-mode gist ssh-config-mode dash gruvbox-theme all-the-icons-ivy use-package spaceline-all-the-icons markdown-preview-mode dockerfile-mode company-php json-mode magit markdown-mode helm flycheck web-mode rainbow-delimiters php-mode nginx-mode anzu)))
+   '(uuidgen tree-sitter py-isort theme-changer diff-hl multiple-cursors typescript-mode go-mode pyvenv lsp-mode gist ssh-config-mode dash gruvbox-theme all-the-icons-ivy use-package spaceline-all-the-icons dockerfile-mode company-php magit helm flycheck web-mode rainbow-delimiters php-mode nginx-mode anzu)))
 
 (setq package-pinned-packages '())
 
@@ -66,8 +60,6 @@
   (delete-other-windows))
 
 (packages-install package-selected-packages)
-
-(require 'init-cosmetic)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; MODES ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Modes
@@ -116,7 +108,6 @@
 
 ;; Major Mode Customization
 (setq-default auto-fill-function nil)
-(setq initial-scratch-message nil)
 
 ;; Autosave & Backup & Lockfiles
 (defvar backup-dir (expand-file-name "~/.emacs.d/backup/"))
@@ -156,13 +147,6 @@
 ;; keep my home clean
 (defvar savehist-file "~/.emacs.d/cache/savehist")
 (savehist-mode t)                      ;; do customization before activation
-
-;; we need a bit more funky pattern, as tramp will start $SHELL
-;; (sudo -s), ie., zsh for root user
-(setq shell-prompt-pattern "^[^a-zA-Z].*[#$%>] *")
-
-;; turkish asciify && deasciify
-(load-file "~/.emacs.d/elisp/turkish.el")
 
 ;; ssh-config-mode
 (autoload 'ssh-config-mode "ssh-config-mode" t)
@@ -215,20 +199,15 @@
 
 ;; Browse the current url
 (global-set-key (kbd "C-c u") 'browse-url)
-
-(require 'init-org-mode)
-
-(setq initial-scratch-message
-      (with-temp-buffer
-        (insert-file-contents (expand-file-name "ascii.txt" user-emacs-directory))
-        (buffer-string)))
-
 (electric-pair-mode 1)
 
-;; init duplicate lines
+;;; My Custom Init Files
+(require 'init-cosmetic)
 (require 'init-duplicate)
 (require 'init-openweekly-plan)
 (require 'init-flatten-log-file)
+(require 'init-temp-files)
+(require 'init-org-mode)
 
 ;; uwe web-mode for common html files
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
@@ -247,24 +226,10 @@
 (global-flycheck-mode)
 ;; Load all *.el files
 (setq-default flycheck-emacs-lisp-load-path 'inherit)
-;;; emacs.el ends here
 
-(global-anzu-mode +1)
-
-;; (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-;; (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-;; (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-
-;; https://github.com/magnars/multiple-cursors.el
-
-(global-set-key (kbd "M-3") #'mc/mark-next-like-this)
-
-
+(global-anzu-mode t)
 (global-diff-hl-mode)
 
-(require 'init-temp-files)
-
-(global-set-key (kbd "M-RET")   'yafolding-toggle-element)
 (provide 'init)
 ;;; init.el ends here
 (custom-set-faces

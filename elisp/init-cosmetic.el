@@ -12,8 +12,12 @@
   (menu-bar-mode 0))
 
 (require 'theme-changer)
+(setq calendar-location-name "Izmir, TR")
+(setq calendar-latitude 38.46)
+(setq calendar-longitude 27.12)
 (change-theme 'gruvbox-light-hard 'gruvbox-dark-hard)
 
+;; format branch name
 (defadvice vc-mode-line (after strip-backend () activate)
   (when (stringp vc-mode)
     (let ((noback (replace-regexp-in-string
@@ -99,12 +103,7 @@
            (file-name-nondirectory (or (buffer-file-name) default-directory)))))
 
 ;; Show line numbers
-(if (version<= "26.0.50" emacs-version )
-    (global-display-line-numbers-mode)
-  (global-linum-mode 0))
-
-(column-number-mode t)                   ;; show column numbers
-(size-indication-mode t)                 ;; show file size (emacs 22+)
+(global-display-line-numbers-mode)
 
 ;; uniquify: unique buffer names
 (require 'uniquify) ;; make buffer names more unique
@@ -137,6 +136,14 @@
 
 (add-hook 'scheme-mode-hook 'my-pretty-lambda)
 (global-prettify-symbols-mode 1)
+
+(setq initial-scratch-message
+      (with-temp-buffer
+        (insert-file-contents (expand-file-name "ascii.txt" user-emacs-directory))
+        (buffer-string)))
+
+(global-anzu-mode t)
+(global-diff-hl-mode)
 
 (provide 'init-cosmetic)
 ;;; init-cosmetic.el ends here

@@ -1,6 +1,9 @@
+;;; init-temp-files -- Create and jump to temporary file or directory
+;;; Commentary:
+;; Create and jump to temporary file or directory
 ;;; Code:
 (defun create-temp-file (fname)
-  "Create temp file"
+  "Create temp file, if FNAME is nil, file name will be random."
   (interactive "sWhat will be extension? ")
   (find-file
    (if (= (length fname) 0)
@@ -29,7 +32,7 @@
   )
 
 (defun jump-to-temp-directory (temp-index)
-  "Jump to temp directory."
+  "Jump to temp directory, If TEMP-INDEX is nil, directory is random."
   (interactive "sWhat is temporary directory index: ")
   (if (= (length temp-index) 0)
       (create-temp-directory)
