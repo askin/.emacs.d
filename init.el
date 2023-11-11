@@ -4,12 +4,11 @@
 ;;; Code:
 
 
-(set-language-environment 'english)
-(setq locale-coding-system 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-selection-coding-system 'utf-8)
-(prefer-coding-system 'utf-8)
+(progn
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (set-scroll-bar-mode nil)
+  (menu-bar-mode 0))
 
 ;; configurations
 (fset 'yes-or-no-p 'y-or-n-p)            ;; enable y/n answers to yes/no
@@ -21,169 +20,121 @@
 ;; Set up load path
 (add-to-list 'load-path site-lisp-dir)
 
-(setq inhibit-startup-message t          ;; don't show ...
-      inhibit-startup-echo-area-message t
-      custom-file                (expand-file-name "custom.el" user-emacs-directory)
-      visible-bell 2
-      package-archives           '(("gnu-elpa" . "https://elpa.gnu.org/packages/")
-                                   ("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/")
-                                   ("melpa"    . "https://melpa.org/packages/"))
-      package-archive-priorities '(("gnu-elpa" . 0)
-                                   ("jcs-elpa" . 5)
-                                   ("melpa"    . 10)))
-
-(use-package uuidgen
-  :ensure t
+(use-package emacs
   :init
-  )
+  :config
+  (setq show-trailing-whitespace t ;; show whitespaces at the end of the line
+	require-final-newline t
+	inhibit-startup-message t          ;; don't show ...
+	inhibit-startup-echo-area-message t
+	custom-file                (expand-file-name "custom.el" user-emacs-directory)
+	visible-bell 2
+	package-archives           '(("gnu-elpa" . "https://elpa.gnu.org/packages/")
+                                     ("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/")
+                                     ("melpa"    . "https://melpa.org/packages/"))
+	package-archive-priorities '(("gnu-elpa" . 0)
+                                     ("jcs-elpa" . 5)
+                                     ("melpa"    . 10))
+	)
+  (progn                                              ;; Set Font and Size
+    (defvar my-font "Fira Code")
+    (set-face-attribute 'default nil :font my-font :height 95)
+    (add-to-list 'default-frame-alist '(height . 40)) ;; Emacs Window Geometry
+    (add-to-list 'default-frame-alist '(width . 145)) ;; Emacs Window Geometry
+    (defun set-face-attribute-for-28-inch ()
+      (interactive)
+      (set-face-attribute 'default nil :font my-font :height 95))
+    (defun set-face-attribute-for-14-inch ()
+      (interactive)
+      (set-face-attribute 'default nil :font my-font :height 105)))
+  (progn ;; Autosave & Backup & Lockfiles
+    (defvar backup-dir (expand-file-name "~/.emacs.d/backup/"))
+    (defvar autosave-dir (expand-file-name "~/.emacs.d/autosave/"))
+    (setq backup-directory-alist (list (cons ".*" backup-dir))
+	  auto-save-list-file-prefix autosave-dir
+	  auto-save-file-name-transforms `((".*" ,autosave-dir t))
+	  create-lockfiles nil))
+  :bind (("C-x C-z" . nil) ;; Disable Ctrl Z
+	 ("C-c u" . 'browse-url))
+  :hook ((before-save . delete-trailing-whitespace)
+	 (prog-mode   . rainbow-delimiters-mode))
 
-(use-package gruvbox-theme
-  :ensure t
-  :init
-  )
+(use-package uuidgen :ensure t)
+(use-package gruvbox-theme :ensure t)
+(use-package diff-hl :ensure t)
+(use-package multiple-cursors :ensure t)
+(use-package pyvenv :ensure t)
+(use-package dash :ensure t)
+(use-package all-the-icons-ivy :ensure t)
+(use-package spaceline-all-the-icons :ensure t)
+(use-package helm :ensure t)
+(use-package rainbow-delimiters :ensure t)
+(use-package nginx-mode :ensure t)
+(use-package ssh-config-mode :ensure t)
 
 (use-package theme-changer
   :ensure t
-  :init
-
-  (require 'theme-changer)
+  :config
   (setq calendar-location-name "Izmir, TR"
         calendar-latitude 38.46
         calendar-longitude 27.12)
-
   (change-theme 'gruvbox-light-hard 'gruvbox-dark-hard)
-  )
-
-
-(use-package diff-hl
-  :ensure t
-  :init
-  )
-
-
-(use-package multiple-cursors
-  :ensure t
-  :init
-  )
-
-(use-package pyvenv
-  :ensure t
-  :init
   )
 
 (use-package gist
   :ensure t
-  :init
-
-  ;; Post current buffer to gist and browse it (require gist)
+  :preface
   (defun gist-buffer-private-browse ()
     "Post current buffer to gist and browse it."
     (interactive)
     (let ((gist-view-gist t))
       (gist-region-private (point-min) (point-max))))
-
-  (global-set-key (kbd "C-c b") 'gist-buffer-private-browse)
-  )
-
-(use-package ssh-config-mode
-  :ensure t
-  :init
-
-  (autoload 'ssh-config-mode "ssh-config-mode" t)
-  (add-to-list 'auto-mode-alist '("/\\.ssh/config\\'"     . ssh-config-mode))
-  (add-to-list 'auto-mode-alist '("/sshd?_config\\'"      . ssh-config-mode))
-  (add-to-list 'auto-mode-alist '("/known_hosts\\'"       . ssh-known-hosts-mode))
-  (add-to-list 'auto-mode-alist '("/authorized_keys2?\\'" . ssh-authorized-keys-mode))
-  (add-hook 'ssh-config-mode-hook 'turn-on-font-lock)
-  )
-
-(use-package dash
-  :ensure t
-  :init
-  )
-
-(use-package all-the-icons-ivy
-  :ensure t
-  :init
-  )
-
-(use-package spaceline-all-the-icons
-  :ensure t
-  :init
-  )
-
-(use-package helm
-  :ensure t
-  :init
+  :config
+  :bind (("C-c b" . gist-buffer-private-browse))
   )
 
 (use-package flycheck
   :ensure t
-  :init
-  ;; Syntax Check For All Type Code
-  (global-flycheck-mode)
-  ;; Load all *.el files
-  (setq-default flycheck-emacs-lisp-load-path 'inherit)
-  )
-
-(use-package rainbow-delimiters
-  :ensure t
-  :init
-  )
-
-(use-package nginx-mode
-  :ensure t
-  :init
+  :config
+  (global-flycheck-mode) ;; Syntax Check For All Type Code
+  (setq-default flycheck-emacs-lisp-load-path 'inherit)   ;; Load all *.el files
   )
 
 (use-package anzu
   :ensure t
-  :init
-
+  :config
   (global-anzu-mode t)
   )
 
+(use-package web-mode
+  :config
+  (setq
+   web-mode-enable-auto-indentation nil
+   web-mode-markup-indent-offset 4
+   web-mode-script-padding 0
+   web-mode-code-indent-offset 4
+   web-mode-style-padding 0
+   web-mode-css-indent-offset 4)
 
+  (add-to-list 'auto-mode-alist '("\\.tpl$" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.erb$" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html$'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.inc$" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.mjml$" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.php$" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.phtml$" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.twig$" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.vue$" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.xml$" . web-mode))
+  )
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; MODES ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Modes
-;; Don't use tabs in any text-mode
-(add-hook 'text-mode-hook
-	  (lambda ()
-	    (setq indent-tabs-mode nil)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; MODES ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; KEYS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; General Keyboard Fixes
-
-;; Disable Ctrl Z
-(global-set-key (kbd "C-x C-z") nil)
-
-;; Browse the current url
-(global-set-key (kbd "C-c u") 'browse-url)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; KEYS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; show whitespaces at the end of the line
-(setq show-trailing-whitespace t)
-
-;; Major Mode Customization
-(setq-default auto-fill-function nil)
-
-;; Autosave & Backup & Lockfiles
-(defvar backup-dir (expand-file-name "~/.emacs.d/backup/"))
-(defvar autosave-dir (expand-file-name "~/.emacs.d/autosave/"))
-(setq
- backup-directory-alist (list (cons ".*" backup-dir))
- auto-save-list-file-prefix autosave-dir
- auto-save-file-name-transforms `((".*" ,autosave-dir t))
- create-lockfiles nil ;; Do not create lock file
- )
-
-;; Remove White Spaces
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-(setq require-final-newline t)           ;; end files with a newline
+(use-package markdown-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+  (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
+  (add-to-list 'auto-mode-alist '("\\.md.erb$" . markdown-mode))
+  )
 
 ;; http://www.emacswiki.org/cgi-bin/wiki/ShowParenMode
 (when (fboundp 'show-paren-mode)
@@ -214,53 +165,15 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
-(add-hook 'python-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-
 (global-display-fill-column-indicator-mode)
-
-(electric-pair-mode 1)
+(electric-pair-mode 1)o
+(global-diff-hl-mode)
 
 ;;; My Custom Init Files
 (require 'init-cosmetic)
 (require 'init-openweekly-plan)
 (require 'init-custome-functions)
 (require 'init-org-mode)
-
-;; uwe web-mode for common html files
-
-(use-package web-mode
-  :ensure t
-  :init
-  (setq
-   web-mode-enable-auto-indentation nil
-   web-mode-markup-indent-offset 4
-   web-mode-script-padding 0
-   web-mode-code-indent-offset 4
-   web-mode-style-padding 0
-   web-mode-css-indent-offset 4)
-
-  (add-to-list 'auto-mode-alist '("\\.tpl$" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.erb$" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.html$'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.inc$" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.mjml$" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.php$" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.phtml$" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.twig$" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.vue$" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.xml$" . web-mode))
-  )
-
-(use-package markdown-mode
-  :ensure t
-  :init
-  (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
-  (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
-  (add-to-list 'auto-mode-alist '("\\.md.erb$" . markdown-mode))
-  )
-
-(global-diff-hl-mode)
 
 (provide 'init)
 ;;; init.el ends here

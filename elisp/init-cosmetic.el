@@ -1,15 +1,6 @@
 ;;; package -- summary
 ;;; Commentary:
 ;;; Code:
-;; Disable Emacs splash screen
-(setq inhibit-startup-message t)
-(setq initial-scratch-message nil)
-
-(progn
-  (tool-bar-mode -1)
-  (scroll-bar-mode -1)
-  (set-scroll-bar-mode nil)
-  (menu-bar-mode 0))
 
 ;; format branch name
 (defadvice vc-mode-line (after strip-backend () activate)
@@ -83,9 +74,6 @@
   )
  )
 
-(set (make-local-variable lisp-indent-function)
-     'common-lisp-indent-function)
-
 ;; Title Format
 (setq-default
  frame-title-format
@@ -107,19 +95,6 @@
  uniquify-after-kill-buffer-p t
  uniquify-ignore-buffers-re "^\\*")
 
-;; Set Font and Size
-;; 28inch
-(set-face-attribute 'default nil :font "Fira Code" :height 95)
-;; 14inch
-(set-face-attribute 'default nil :font "Fira Code" :height 105)
-
-;; (set-face-attribute 'default nil :font "Monospace" :height 105)
-;; (set-face-attribute 'default (selected-frame) :height 90)
-
-;; Emacs Window Geometry
-(add-to-list 'default-frame-alist '(height . 40))
-(add-to-list 'default-frame-alist '(width . 145))
-
 ;; lambda to λ
 (defun my-pretty-lambda ()
   "Make some word or string show as pretty Unicode symbols."
@@ -136,7 +111,6 @@
         (insert-file-contents (expand-file-name "ascii.txt" user-emacs-directory))
         (buffer-string)))
 
-(global-anzu-mode t)
 (global-diff-hl-mode)
 
 (provide 'init-cosmetic)
