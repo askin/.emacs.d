@@ -57,7 +57,7 @@
   :bind (("C-x C-z" . nil) ;; Disable Ctrl Z
 	 ("C-c u" . 'browse-url))
   :hook ((before-save . delete-trailing-whitespace)
-	 (prog-mode   . rainbow-delimiters-mode))
+	 (prog-mode   . rainbow-delimiters-mode)))
 
 (use-package uuidgen :ensure t)
 (use-package gruvbox-theme :ensure t)
