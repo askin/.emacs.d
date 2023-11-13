@@ -54,6 +54,11 @@
 	  auto-save-list-file-prefix autosave-dir
 	  auto-save-file-name-transforms `((".*" ,autosave-dir t))
 	  create-lockfiles nil))
+  (global-hl-line-mode 1)
+  (global-display-line-numbers-mode) ;; Show line numbers
+  (global-display-fill-column-indicator-mode)
+  (electric-pair-mode 1)
+  (global-diff-hl-mode)
   :bind (("C-x C-z" . nil) ;; Disable Ctrl Z
 	 ("C-c u" . 'browse-url))
   :hook ((before-save . delete-trailing-whitespace)
@@ -161,16 +166,12 @@
 (savehist-mode t)                      ;; do customization before activation
 
 ;; activate uppercase - lowercase functions
-(global-hl-line-mode 1)
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
-(global-display-fill-column-indicator-mode)
-(electric-pair-mode 1)o
-(global-diff-hl-mode)
-
 ;;; My Custom Init Files
 (require 'init-cosmetic)
+(require 'init-mode-line)
 (require 'init-openweekly-plan)
 (require 'init-custome-functions)
 (require 'init-org-mode)
