@@ -112,6 +112,7 @@
   )
 
 (use-package web-mode
+  :ensure t
   :config
   (setq
    web-mode-enable-auto-indentation nil
@@ -131,6 +132,7 @@
   (add-to-list 'auto-mode-alist '("\\.twig$" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.vue$" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.xml$" . web-mode))
+  :hook ((web-mode . (lambda () (setq indent-tabs-mode nil))))
   )
 
 (use-package markdown-mode
