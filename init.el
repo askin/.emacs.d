@@ -145,9 +145,9 @@
 (use-package markdown-preview-mode
   :ensure t
   :config
-  (setq markdown-command "~/bin/markdown"
-	markdown-preview-stylesheets (list "https://cdn.askin.ws/emacs/markdown-preview-mode-do-style.css"))
-  )
+  (setq markdown-command "~/projects/md-cli/index.js"
+	markdown-preview-stylesheets (list "https://cdn.askin.ws/emacs/markdown-preview-mode-do-style.css"
+					   "https://cdn.askin.ws/emacs/markdown-preview-mode-body-style.css")))
 
 ;; http://www.emacswiki.org/cgi-bin/wiki/ShowParenMode
 (when (fboundp 'show-paren-mode)
