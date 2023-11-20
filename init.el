@@ -141,13 +141,13 @@
   (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.md.erb$" . markdown-mode))
-  :custom-face (markdown-code-face ((t (nil))))
+  :custom-face (markdown-code-face ((t (:inherit nil))))
   )
 
 (use-package markdown-preview-mode
   :ensure t
   :config
-  (setq markdown-command "~/projects/md-cli/index.js"
+  (setq markdown-command "do-markdownit-cli"
 	markdown-preview-stylesheets (list "https://cdn.askin.ws/emacs/markdown-preview-mode-do-style.css"
 					   "https://cdn.askin.ws/emacs/markdown-preview-mode-body-style.css")))
 
