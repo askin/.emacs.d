@@ -88,20 +88,7 @@ emacsclient -t
   * Create directory `M-x create-temp-directory`
 * Insert or align comment `M-;` or `M-x indent-for-comment`.
 * Insert `UUID` `M-x uuidgen`
-
-# Key bindings for eyebrowse-mode
-The default key bindings are:
-
-| Key bind    | Function                         |
-|-------------|----------------------------------|
-| `C-c C-w <` | Switch to previous window config |
-| `C-c C-w >` | Switch to next window config     |
-| `C-c C-w '` | Switch to last window config     |
-| `C-c C-w "` | Close current window config      |
-| `C-c C-w ,` | Rename current window config     |
-| `C-c C-w 0` | Switch to window config `0`      |
-| ...         | ...                              |
-| `C-c C-w 9` | Switch to window config `9`      |
+* Save As `C-x C-w`
 
 # Emacs Bookmark
 
