@@ -139,6 +139,14 @@
   (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.md.erb$" . markdown-mode))
+  :custom-face (markdown-code-face ((t (nil))))
+  )
+
+(use-package markdown-preview-mode
+  :ensure t
+  :config
+  (setq markdown-command "~/bin/markdown"
+	markdown-preview-stylesheets (list "https://cdn.askin.ws/emacs/markdown-preview-mode-do-style.css"))
   )
 
 ;; http://www.emacswiki.org/cgi-bin/wiki/ShowParenMode
