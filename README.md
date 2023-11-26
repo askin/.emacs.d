@@ -4,6 +4,12 @@
 [![License](http://img.shields.io/:license-gpl3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0.html)
 
 # Installation
+
+## Requirements
+1. [Emcas](https://www.gnu.org/savannah-checkouts/gnu/emacs/emacs.html) 29.1 or newer.
+2. Fira Code fonts => [https://github.com/tonsky/FiraCode](https://github.com/tonsky/FiraCode)
+3. `do-markdownit-cli` Used on `markdown-preview-mode` => [https://github.com/askin/do-markdownit-cli](https://github.com/askin/do-markdownit-cli)
+
 ```bash
 cd ~
 git clone git@github.com:askin/.emacs.d.git
@@ -89,6 +95,7 @@ emacsclient -t
 * Insert or align comment `M-;` or `M-x indent-for-comment`.
 * Insert `UUID` `M-x uuidgen`
 * Save As `C-x C-w`
+* Open markdown preview mode `M-x markdown-preview-mode`
 
 # Emacs Bookmark
 
