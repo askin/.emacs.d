@@ -59,6 +59,7 @@
   (global-display-fill-column-indicator-mode)
   (electric-pair-mode 1)
   (global-diff-hl-mode)
+  (setq-default indent-tabs-mode nil)
   :bind (("C-x C-z" . nil) ;; Disable Ctrl Z
 	 ("C-c u" . 'browse-url))
   :hook ((before-save . delete-trailing-whitespace)
@@ -103,7 +104,17 @@
   :config
   (global-flycheck-mode) ;; Syntax Check For All Type Code
   (setq-default flycheck-emacs-lisp-load-path 'inherit)   ;; Load all *.el files
-  )
+  (defun use-eslint-from-node-modules ()
+    "Find and set eslint path from node-modules."
+    (let* ((root (locate-dominating-file
+                  (or (buffer-file-name) default-directory)
+                  "node_modules"))
+           (eslint
+            (and root
+                 (expand-file-name "node_modules/.bin/eslint" root))))
+      (when (and eslint (file-executable-p eslint))
+        (setq-local flycheck-javascript-eslint-executable eslint))))
+  :hook (js-mode . (lambda () (use-eslint-from-node-modules))))
 
 (use-package anzu
   :ensure t
@@ -113,18 +124,19 @@
 
 (use-package web-mode
   :ensure t
-  :config
+  :init
   (setq
-   web-mode-enable-auto-indentation nil
-   web-mode-markup-indent-offset 4
+   web-mode-enable-auto-indentation t
    web-mode-script-padding 0
-   web-mode-code-indent-offset 4
    web-mode-style-padding 0
-   web-mode-css-indent-offset 4)
+   web-mode-code-indent-offset 2
+   web-mode-markup-indent-offset 2
+   web-mode-css-indent-offset 2)
 
+  :config
   (add-to-list 'auto-mode-alist '("\\.tpl$" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.erb$" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.html$'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.inc$" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.mjml$" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.php$" . web-mode))
