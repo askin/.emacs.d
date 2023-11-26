@@ -103,7 +103,15 @@
   :ensure t
   :config
   (global-flycheck-mode) ;; Syntax Check For All Type Code
-  (setq-default flycheck-emacs-lisp-load-path 'inherit)   ;; Load all *.el files
+  (setq-default flycheck-emacs-lisp-load-path 'inherit)   ;; Load all *.el files)
+  )
+
+(use-package js2-mode
+  :ensure t
+  :init
+  (setq js-indent-level 2
+        js-chain-indent t)
+  :config
   (defun use-eslint-from-node-modules ()
     "Find and set eslint path from node-modules."
     (let* ((root (locate-dominating-file
@@ -114,7 +122,8 @@
                  (expand-file-name "node_modules/.bin/eslint" root))))
       (when (and eslint (file-executable-p eslint))
         (setq-local flycheck-javascript-eslint-executable eslint))))
-  :hook (js-mode . (lambda () (use-eslint-from-node-modules))))
+  :hook (js-mode . (lambda () (use-eslint-from-node-modules)))
+  :hook (js-mode . js2-minor-mode))
 
 (use-package anzu
   :ensure t
