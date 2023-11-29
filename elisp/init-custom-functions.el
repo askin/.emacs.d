@@ -94,5 +94,5 @@
 
 
 ;; provide
-(provide 'init-custome-functions)
-;;; init-custome-functions.el ends here
+(provide 'init-custom-functions)
+;;; init-custom-functions.el ends here

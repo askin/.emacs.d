@@ -204,7 +204,7 @@
 (require 'init-cosmetic)
 (require 'init-mode-line)
 (require 'init-openweekly-plan)
-(require 'init-custome-functions)
+(require 'init-custom-functions)
 (require 'init-org-mode)
 
 (provide 'init)
