@@ -8,3 +8,6 @@ transient/
 eln-cache/
 tree-sitter/
 custom.el
+backup/
+cache/
+autosave/
