@@ -3,16 +3,15 @@
 ;; Flatten log files
 
 ;;; Code:
-(require 'dash)
-
 (defun flatten-log-file ()
   "Flatten log files."
   (interactive)
-  (let ((charlist '(("\\n" "\n") ("\\t" "\t"))))
-    (--each charlist
-      (goto-char (point-min))
-      (while (search-forward (car it) nil t)
-        (replace-match (car (cdr it)))))))
+  (mapcar
+   (lambda (it)
+     (goto-char (point-min))
+     (while (search-forward (car it) nil t)
+       (replace-match (car (cdr it)))))
+   '(("\\n" "\n") ("\\t" "\t"))))
 
 ;; Kill all buffers
 (defun close-all-buffers ()
