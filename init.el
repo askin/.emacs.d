@@ -54,27 +54,27 @@
 	  auto-save-list-file-prefix autosave-dir
 	  auto-save-file-name-transforms `((".*" ,autosave-dir t))
 	  create-lockfiles nil))
-  (global-hl-line-mode 1)
   (global-display-line-numbers-mode) ;; Show line numbers
   (global-display-fill-column-indicator-mode)
   (electric-pair-mode 1)
-  (global-diff-hl-mode)
+
   (setq-default indent-tabs-mode nil)
   :bind (("C-x C-z" . nil) ;; Disable Ctrl Z
 	 ("C-c u" . 'browse-url))
   :hook ((before-save . delete-trailing-whitespace)
-	 (prog-mode   . rainbow-delimiters-mode)))
+         ))
 
 (use-package uuidgen :ensure t)
 (use-package gruvbox-theme :ensure t)
-(use-package diff-hl :ensure t)
+(use-package diff-hl :ensure t
+  :config
+  (global-diff-hl-mode))
 (use-package multiple-cursors :ensure t)
 (use-package pyvenv :ensure t)
-(use-package dash :ensure t)
 (use-package all-the-icons-ivy :ensure t)
-(use-package spaceline-all-the-icons :ensure t)
 (use-package helm :ensure t)
-(use-package rainbow-delimiters :ensure t)
+(use-package rainbow-delimiters :ensure t
+  :hook (prog-mode . rainbow-delimiters-mode))
 (use-package nginx-mode :ensure t)
 (use-package ssh-config-mode :ensure t)
 
