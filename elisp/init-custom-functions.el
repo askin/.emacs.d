@@ -19,16 +19,30 @@
   (interactive)
   (mapc 'kill-buffer (buffer-list)))
 
+
+(defgroup custom-functions nil
+  "Custom functions default group."
+  :group 'text
+  :prefix "custom-functions-"
+  :link '(url-link "https://github.com/askin/.emacs.d"))
+
+(defcustom custom-functions-temp-file-prefix "emacs-temp-"
+  "Default prefix for create-temp-file."
+  :group 'custom-functions
+  :type 'string)
+
+(defcustom custom-functions-temp-file-default-suffix ".txt"
+  "Default suffix for create-temp-file."
+  :group 'custom-functions
+  :type 'string)
+
 (defun create-temp-file (fname)
   "Create temp file, if FNAME is nil, file name will be random."
   (interactive "sWhat will be extension? ")
-  (find-file
-   (if (= (length fname) 0)
-       (make-temp-name "emacs-temp")
-     (concat "/tmp/" (make-temp-name "emacs-temp") "." fname)
-     )
-   )
-  )
+  (let ((suffix (if (= (length fname) 0)
+                    custom-functions-temp-file-default-suffix
+                  (concat "." fname))))
+    (find-file (make-temp-file custom-functions-temp-file-prefix nil suffix nil))))
 
 
 (defun first (check-function listparam)
