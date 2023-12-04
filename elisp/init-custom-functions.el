@@ -10,7 +10,7 @@
    (lambda (it)
      (goto-char (point-min))
      (while (search-forward (car it) nil t)
-       (replace-match (car (cdr it)))))
+       (replace-match (cadr it))))
    '(("\\n" "\n") ("\\t" "\t"))))
 
 ;; Kill all buffers
@@ -30,39 +30,23 @@
    )
   )
 
+
+(defun first (check-function listparam)
+  "Return fist matching item.  CHECK-FUNCTION for checking, LISTPARAM is for data."
+  (if (funcall check-function (car listparam))
+      (car listparam)
+    (first check-function (cdr listparam))
+  ))
+
 (defun create-temp-directory ()
   "Create temp directory."
   (interactive)
-  (let ((dirs (number-sequence 0 1000)))
-    (while dirs
-      (let ((directory-name (format "/tmp/%d" (car dirs))))
-        (if (not (file-directory-p directory-name))
-            ;; (find-dired (concat "/tmp/" (car dirs))) (setq dirs (cdr dirs))
-            (progn
-              (make-directory directory-name)
-              (find-file directory-name)
-              (setq dirs nil))
-          (setq dirs (cdr dirs)))
-        )
-      )
-    )
-  )
-
-(defun jump-to-temp-directory (temp-index)
-  "Jump to temp directory, If TEMP-INDEX is nil, directory is random."
-  (interactive "sWhat is temporary directory index: ")
-  (if (= (length temp-index) 0)
-      (create-temp-directory)
-    (let ((directory-name (format "/tmp/%s" temp-index)))
-      (if (not (file-directory-p directory-name))
-          (progn
-            (make-directory directory-name)
-            (find-file directory-name))
-        (find-file directory-name)
-        )
-      )
-    )
-  )
+  (let ((directory-name
+         (first
+          (lambda (directory) (not (file-directory-p directory)))
+          (mapcar (lambda (item) (format "/tmp/%d" item)) (number-sequence 0 1000)))))
+    (make-directory directory-name)
+    (find-file directory-name)))
 
 (defun djcb-duplicate-line (&optional commentfirst)
   "Duplicate line; if COMMENTFIRST is non-nil, comment the original."
